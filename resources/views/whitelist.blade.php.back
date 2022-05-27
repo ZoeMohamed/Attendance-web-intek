@@ -1,0 +1,135 @@
+@extends('olay')
+
+@section('header_content')
+<div class="breadcrumb-header justify-content-between">
+						<div class="left-content">
+							<div>
+							  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!, {{ Auth::user()->name }}</h2>
+							  <p class="mg-b-0">Attendance monitoring dashboard  </p><br>
+                <h3 align="center">On Progress , Regards LEX</h3>
+							</div>
+						</div>
+						
+					</div>
+@endsection
+@section('main_content')
+<div class="row row-sm">
+    <div class="col-xl-12">
+        <div id="map"></div>
+        <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Office Location</th>
+            <th scope="col">Radius</th>
+          </tr>
+        </thead>
+        <tbody>
+          @php 
+          $i = 1;
+          @endphp
+          @foreach($get_data as $data)
+          <tr>
+            <th scope="row">{{ $i++ }}</th>
+            <td>{{ $data->name }}</td>
+            <td>{{ ($data->name_location == null) ? $data->name_office : $data->name_location}}</td>
+            <td>{{ $data->radius_allow }} {{ ($data->radius_allow >= 1000) ? "KiloMeter": "Meter" }}</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+
+    </div>
+</div>
+
+@endsection
+@section('script')
+
+<script>
+
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(-6.1753924,106.8271528),
+          
+          zoom: 11
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+          downloadUrl('{{ url('/whitelist/api') }}', function(data) {
+
+            var markers=JSON.parse(data.responseText);
+
+            markers.forEach(function(element) {          
+                var id_office = element.office_id;
+                var nama_pariwisata = element.name_office;
+                var alamat = element.address;
+                var point = new google.maps.LatLng(
+                    parseFloat(element.lat),
+                    parseFloat(element.long));
+
+                var infowincontent = document.createElement('div');
+                var strong = document.createElement('strong');
+                strong.textContent = nama_pariwisata
+                infowincontent.appendChild(strong);
+                infowincontent.appendChild(document.createElement('br'));
+
+                var text = document.createElement('text');
+                text.textContent = alamat
+                infowincontent.appendChild(text);
+                var marker = new google.maps.Marker({
+                  map: map,
+                  position: point
+                });
+                marker.addListener('click', function() {
+                  console.log("CLIK"+element.office_id);
+                  $.ajax({
+                    url: "{{ url('whitelist') }}",
+                    type: "get", //send it through get method
+                    data: { 
+                      id_office: id_office, 
+                    },
+                    success: function(response) {
+                      //Do Something
+                      window.location.href = window.location.href.split('?')[0]+"?id_office="+id_office;
+                    },
+                    error: function(xhr) {
+                      //Do Something to handle error
+                    }
+                  });
+                  infoWindow.setContent(infowincontent);
+                  infoWindow.open(map, marker);
+                });
+                var circle = new google.maps.Circle({
+                  map: map,
+                  radius: element.radius_allow,    // 10 miles in metres
+                  fillColor: '#AA0000'
+                });
+                circle.bindTo('center', marker, 'position');
+            });
+            
+          });
+        }
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}
+    </script>
+     <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlQLZyf324-A8BGbeKn8KtYvTOa-S0eMI&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+@endsection
