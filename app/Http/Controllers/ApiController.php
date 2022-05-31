@@ -26,8 +26,10 @@ class ApiController extends Controller
 {
     public function recive(Request $request){
         date_default_timezone_set("Asia/Jakarta");
-        $data =  $request->json()->all();
-        // var_dump($data);
+
+
+        $data =  $request;
+        var_dump($data);
 
         // die();
         $id_user = $data['id'];
@@ -103,14 +105,14 @@ class ApiController extends Controller
                 }
                 $hourn = Carbon::parse($date)->format('H');
                 $minuten = Carbon::parse($date)->format('i');
-                if($get_profuser->position == 0  && $hourn >= 9 && $minuten > 0 || $get_profuser->position == 2  && $hourn >= 9 && $minuten > 0){ //khusus pasming 09:01 dianggap telat get by position 0
+                if($get_profuser->position == 0  && $hourn >=0 && $minuten > 0 || $get_profuser->position == 2  && $hourn >= 9 && $minuten > 0){ //khusus pasming 09:01 dianggap telat get by position 0
                     $gettmbtl = Tmtable::where('day', $name_day)->where('type', 'late')->first();
 
                     MAttend::create([
                         'date'=> Carbon::parse($date)->format('Y-m-d'),
                         'mprof_id'=> $get_profuser->id,
                         'tmtable_id'=> $gettmbtl->id,
-                        'in_time' => ( $gettmbtl->type == "in") ? Carbon::parse($date)->format('H:i:s') : "00:00:00",
+                        '222' => ( $gettmbtl->type == "in") ? Carbon::parse($date)->format('H:i:s') : "00:00:00",
                         'in_tolerance_time'  => ( $gettmbtl->type == "in_tolerance") ? Carbon::parse($date)->format('H:i:s') : "00:00:00",
                         'out_time' => ( $check_tmtable->type == "out") ? Carbon::parse($date)->format('H:i:s') : "00:00:00",
                         'over_time' => ( $check_tmtable->type == "over") ? Carbon::parse($date)->format('H:i:s') : "00:00:00",
@@ -216,15 +218,15 @@ class ApiController extends Controller
                 Log::debug($request);
             }
 
-            return response()->json(['status'=> 'Already , and go update lasted attend']);
-        }
+            return response()->json(['status'=> $data['id']]);
+        
 
         // MLogging::create(['mprof_id' => $id_user, 'name' => $name, 'log_time'=> null, 'sunrise'=> null, '1']);
         // Log::info(var_dump($request, true));
 
         // return $request;
     }
-
+    }
     public function reciveaPY(Request $data){
         date_default_timezone_set("Asia/Jakarta");
 
