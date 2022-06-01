@@ -15,9 +15,9 @@ class AddLocationMachineTomAttends extends Migration
     {
         //
         Schema::table('m_attends', function($table) {
-            $table->string('type_data')->default(NULL);
+            $table->string('type_data')->nullable()->default(NULL);
             $table->string('noted')->default(NULL);
-            $table->integer('status_employee')->default(NULL);
+            $table->integer('status_employee')->nullable()->default(NULL);
             $table->integer('machine_id')->default(NULL);
             $table->string('lat_attend')->default(NULL);
             $table->string('lon_attend')->default(NULL);

@@ -6,10 +6,10 @@
 		<div>
 			<h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!, {{ Auth::user()->name }} <button class="btn btn-success" data-target="#addperson" data-toggle="modal">Add User</button> <button class="btn btn-warning" data-target="#addprofile" data-toggle="modal">Add Profile</button></h2>
 			<p class="mg-b-0">Attendance monitoring dashboard</p>
-			
+
 			@if ($message = Session::get('message'))
 			<div class="alert alert-success alert-block">
-				<button type="button" class="close" data-dismiss="alert">×</button> 
+				<button type="button" class="close" data-dismiss="alert">×</button>
 				<strong>{{ $message }}</strong>
 			</div>
 			@endif
@@ -56,7 +56,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 							<div class="card bg-success-gradient text-white">
@@ -72,7 +72,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 							<div class="card bg-danger-gradient text-white">
@@ -88,7 +88,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 						<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
 							<div class="card bg-info-gradient text-white">
@@ -134,7 +134,7 @@
 												<h4 class="tx-20 font-weight-bold mb-1 text-white"></h4>
 												<p class="mb-0 tx-12 text-white op-7">Attendance of the Day</p>
 											</div>
-											
+
 										</div>
 									</div>
 								</div>
@@ -144,19 +144,19 @@
 					</div>
 					<!-- row closed -->
 					<!-- row -->
-					
+
 					<div class="row row-sm">
 						<div class="col-md-12 col-xl-4">
 							<div class="card">
 								<div class="card-body">
 									<div class="d-flex justify-content-between">
 										<h4 class="card-title">IN Attendance <a href="{{ url('/home') }}?showintolerance=true"><button class="btn btn-sm btn-danger">Show Time Tolerance</button></a><a href="{{ url('/home') }}?mobile=true"><button class="btn btn-sm btn-warning">Mobile Only</button></a></h4>
-										
+
 										<i class="mdi mdi-dots-vertical"></i>
 									</div>
 									<p class="card-description mb-1">Time Category In Start At {{ (isset($timetable_in->start_at)) ? $timetable_in->start_at : "00:00:00"  }} - {{ (isset($timetable_in->end_at)) ? $timetable_in->end_at : "00:00:00" }}</p>
 									<div style="max-height: 700px; overflow: auto;">
-									
+
 									@if(count($in) > 0 )
 										@foreach($in as $dec)
 											@php
@@ -182,10 +182,10 @@
 											@endphp
 											@php
 											//$img = asset($getImages->file);
-											
+
 											$file = (isset($getImages->file)) ? $getImages->file : asset("assets/img/default.png");
 											$img_capture = (isset($dec->type_data)) ? $dec->type_data : $file;
-										
+
 											if($dec->type_data != ""){
 												$img = asset('thumbnail/'.$dec->type_data);
 											}elseif(file_exists($file)){
@@ -199,10 +199,10 @@
 												<div class="avatar brround d-block cover-image" data-image-src="{{ $img }}">
 													<span class="avatar-status bg-green"></span>
 												</div>
-												
+
 												<div class="wrapper w-100 ml-3">
 													<p class="mb-0">
-													
+
 													@if($mobile == true)
 													<a class="button" data-toggle="collapse" href="#collapseExample{{$dec->mprof_id}}" role="button" aria-expanded="false" aria-controls="collapseExample"> <b>{{ $dec->name }} </b> <span class='badge badge-{{ ($dec->machine_id == 4) ? 'warning' : 'info' }}'> {{ $st }}</span></p></a>
 													@else
@@ -225,7 +225,7 @@
 															@else
 															<p class="mb-0">-</p>
 															@endif
-															
+
 														</div>
 														<small class="text-warning ml-auto">
 														@if($dec->in_time != "00:00:00" && $dec->status_employee == 1)
@@ -237,16 +237,15 @@
 														@elseif($dec->in_time != "00:00:00" & $dec->status_employee == 4)
 														<span class='badge badge-info'>Permit</span>
 														@elseif($dec->in_time != "00:00:00")
-
 														@elseif($dec->status_employee == 1)
 														<span class='badge badge-info'>Attendance Manual</span>
 														@elseif($showIntolerance == true)
 														In Tolerance : <span class='badge badge-warning'>{{ $hasil2 }}</span>
 														@endif
 														</small>
-														
+
 													</div>
-													
+
 													@if($mobile == true)
 													<div class="collapse" id="collapseExample{{$dec->mprof_id}}">
 													<div class="card card-body">
@@ -267,7 +266,7 @@
 						</div>
 						<div class="col-md-12 col-xl-4">
 							<div class="card">
-								
+
 								<div class="card-body">
 									<div class="d-flex justify-content-between">
 										<h4 class="card-title">Late Attendance</h4>
@@ -300,7 +299,7 @@
 									@php
 										$file = (isset($getImages->file)) ? $getImages->file : asset("assets/img/default.png");
 										$img_capture = (isset($dec->type_data)) ? $dec->type_data : $file;
-										
+
 										if($dec->type_data != ""){
 											$img = asset('thumbnail/'.$dec->type_data);
 										}elseif(file_exists($file)){
@@ -314,16 +313,16 @@
 										<div class="avatar brround d-block cover-image" data-image-src="{{ $img }}">
 											<span class="avatar-status bg-green"></span>
 										</div>
-										
+
 										<div class="wrapper w-100 ml-3">
 											<p class="mb-0">
-											
+
 											@if($mobile == true)
 											<a class="button" data-toggle="collapse" href="#collapseExample{{$dec->mprof_id}}" role="button" aria-expanded="false" aria-controls="collapseExample"> <b>{{ $dec->name }} </b> <span class='badge badge-{{ ($dec->machine_id == 4) ? 'warning' : 'info' }}'> {{ $st }}</span></p></a>
 											@else
 											<a href="{{ url('detail/'.$dec->mprof_id) }}"><b>{{ $dec->name }} </b> <span class='badge badge-{{ ($dec->machine_id == 4) ? 'warning' : 'info' }}'> {{ $dec->name_office}}</span></p></a>
 											@endif
-											
+
 											<div class="d-sm-flex justify-content-between align-items-center">
 												<div class="d-flex align-items-center">
 													<i class="mdi mdi-clock text-muted mr-1"></i>
@@ -340,8 +339,8 @@
 											</div>
 											@endif
 										</div>
-										
-										
+
+
 									</div>
 									@endforeach
 									@else
@@ -397,7 +396,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 					<div class="modal" id="select2modal">
 						<div class="modal-dialog" role="document">
@@ -433,7 +432,7 @@
 									<input type="text" name="daterange" class="form-control date" placeholder="Pick the multiple dates"><br>
 									<h6>Note</h6>
 									<textarea class="form-control mg-t-20" name="noted" placeholder="If any note for status ,please you fill this text area ,thanks" required="" rows="3"></textarea>
-									
+
 									<!-- Select2 -->
 									<!-- <p class="mt-3">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p> -->
 								</div>
@@ -496,7 +495,7 @@
 						</div>
 					</div>
 
-				
+
 
 @endsection
 @section('footer')

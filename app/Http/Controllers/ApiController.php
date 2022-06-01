@@ -38,8 +38,6 @@ class ApiController extends Controller
         $type = $data['attend_by'];
         $time = Carbon::parse($date)->format('H:i:s');
         $name_day = Carbon::parse($date)->format('l');
-
-
         $get_profuser = MProf::where('user_id', $id_user)->first();
         //dd($get_profuser);
         if($get_profuser->phone_number == "0"){
@@ -1149,5 +1147,5 @@ class ApiController extends Controller
         }
         return response()->json($data);
         // dd($data);
-    } 
+    }
 }
