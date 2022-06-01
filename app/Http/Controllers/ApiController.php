@@ -985,7 +985,7 @@ class ApiController extends Controller
     public function daysOff(request $request)
     {
         $mprof=MProf::where('user_id',$request->user_id)->first();
-        $days_off_view = day_off::where('name',$mprof->name)->get();
+        $days_off_view = day_off::where('name',$mprof->name)->orderBy('created_at','desc')->get();
         // dd($days_off_view);
         // day_off::where("id",$request->id)->update([
         //     "name"=>$request->name
