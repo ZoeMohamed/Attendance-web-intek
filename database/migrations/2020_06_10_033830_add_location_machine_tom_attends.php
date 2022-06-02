@@ -21,6 +21,8 @@ class AddLocationMachineTomAttends extends Migration
             $table->integer('machine_id')->default(NULL);
             $table->string('lat_attend')->default(NULL);
             $table->string('lon_attend')->default(NULL);
+            $table->string('out_location')->nullable()->default(NULL);
+            $table->string('out_face')->nullable()->default(NULL);
         });
     }
 

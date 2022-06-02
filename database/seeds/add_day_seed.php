@@ -53,12 +53,12 @@ class add_day_seed extends Seeder
         ]);
 
         day_off::Create([
-            'name' => 'abdul',
+            'name' => 'aldy',
             'position'=>'staf programmer',
             'departement'=>'programmer',
             'supervisor'=>'ezhar mahesa',
             'replacement_pic'=>'neina',
-            'reason'=>'kucingnya sakit pt 2',
+            'reason'=>'Sakit',
             'submitted_job'=>'fixing attendance cuti function',
             'days_off_date'=>date('2022-04-30'),
             'total_days'=>2,

@@ -12,7 +12,7 @@ class m_attend_seeder extends Seeder
      */
     public function run()
     {
-        
+
         MAttend::create([
             'date' => '2022-12-23',
             'mprof_id' => 1,
@@ -32,10 +32,10 @@ class m_attend_seeder extends Seeder
             'machine_id' => 4,
             'lat_attend' => "",
             'lon_attend' => "",
-            // 'out_location' => null,
-            // 'out_face' => null,
+            'out_location' => null,
+            'out_face' => null,
             'status_sync' => 0,
-            'status_sync_in' =>0 
+            'status_sync_in' =>0
         ]);
         MAttend::create([
             'date' => '2022-12-23',
@@ -56,10 +56,10 @@ class m_attend_seeder extends Seeder
             'machine_id' => 4,
             'lat_attend' => "",
             'lon_attend' => "",
-            // 'out_location' => null,
-            // 'out_face' => null,
+            'out_location' => null,
+            'out_face' => null,
             'status_sync' => 0,
-            'status_sync_in' =>0 
+            'status_sync_in' =>0
         ]);
 
         MAttend::create([
@@ -81,10 +81,10 @@ class m_attend_seeder extends Seeder
             'machine_id' => 4,
             'lat_attend' => "",
             'lon_attend' => "",
-            // 'out_location' => null,
-            // 'out_face' => null,
+            'out_location' => null,
+            'out_face' => null,
             'status_sync' => 0,
-            'status_sync_in' =>0 
+            'status_sync_in' =>0
         ]);
 
     }

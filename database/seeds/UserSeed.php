@@ -20,7 +20,7 @@ class UserSeed extends Seeder
 	    'password' => bcrypt('adminidi'),
         'api_token' => 'sadqw212'
 	]);
-    
+
     User::create([
         'id'=>1,
 	    'email' => 'user@user.com',
@@ -37,18 +37,19 @@ class UserSeed extends Seeder
 	    'password' => bcrypt('adminidi'),
         'api_token' => 'sadqw2113'
 	]);
-    
-    
+
+
     User::create([
         'id'=>3,
-	    'email' => 'abdul@abdul.com',
-	    'name' => 'abdul',
+	    'email' => 'aldy@aldy.com',
+	    'name' => 'aldy',
 	    'password' => bcrypt('adminidi'),
-        'api_token' => 'sadqw2114'
+        'api_token' => 'sadqw2114',
+        'team_id' => 1
 	]);
 
 
     }
 
-    
+
 }

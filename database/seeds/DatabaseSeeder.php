@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MProf_Seed::class);
         $this->call(add_day_seed::class);
         $this->call(m_attend_seeder::class);
+        $this->call(OfficeSeeder::class);
+        $this->call(NotificationSeeder::class);
     }
 }

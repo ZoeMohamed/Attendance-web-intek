@@ -15,20 +15,20 @@ class MProf_Seed extends Seeder
         MProf::create([
             'name' => 'neina',
             'position' => 'Staff Programmer',
-            // 'created_at' => '', 	
-            // 'updated_at' => '',	
+            // 'created_at' => '',
+            // 'updated_at' => '',
             'phone_number' => '628123456678' ,
             'division_id' => 1,
             'user_id' => 1,
             'status' => 1
         ]);
-       
+
 
         MProf::create([
             'name' => 'zoe',
             'position' => 'Staff Programmer',
-            // 'created_at' => '', 	
-            // 'updated_at' => '',	
+            // 'created_at' => '',
+            // 'updated_at' => '',
             'phone_number' => '628133456678' ,
             'division_id' => 1,
             'user_id' => 2,
@@ -36,10 +36,10 @@ class MProf_Seed extends Seeder
         ]);
 
         MProf::create([
-            'name' => 'abdul',
+            'name' => 'aldy',
             'position' => 'Staff Programmer',
-            // 'created_at' => '', 	
-            // 'updated_at' => '',	
+            // 'created_at' => '',
+            // 'updated_at' => '',
             'phone_number' => '628133456678' ,
             'division_id' => 1,
             'user_id' => 3,
